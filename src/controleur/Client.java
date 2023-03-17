@@ -3,7 +3,7 @@ package controleur;
 public class Client {
 
     private int idc;
-    private String nomc, prenomc, rue, cp, ville_c, pays_c, mail_c, datenaiss_c, mdp_c;
+    private String nomc, prenomc, rue, cp, villec, pays_c, mail_c, datenaiss_c, mdp_c;
 
     public Client(
       
@@ -28,7 +28,7 @@ public class Client {
 			this.datenaiss_c = datenaiss_c;
 			this.rue = rue;
 			this.cp = cp;
-			this.ville_c = ville_c;
+			this.villec = ville_c;
 			this.mdp_c = mdp_c;
 			this.pays_c = pays_c;
 			
@@ -42,20 +42,20 @@ public void setIdc(int idc) {
     this.idc = idc;
 }
 
-public String getNom_c() {
+public String getNomc() {
     return nomc;
 }
 
-public void setNom_c(String nomc) {
+public void setNomc(String nomc) {
     this.nomc = nomc;
 }
 
-public String getPrenom_c() {
+public String getPrenomc() {
     return prenomc;
 }
 
-public void setPrenom_c(String prenom_c) {
-    this.prenomc = prenom_c;
+public void setPrenom_c(String prenomc) {
+    this.prenomc = prenomc;
 }
 
 public String getMail_c() {
@@ -66,12 +66,12 @@ public void setMail_c(String mail_c) {
     this.mail_c = mail_c;
 }
 
-public String getDate_naiss_c() {
+public String getDatenaiss_c() {
     return datenaiss_c;
 }
 
-public void setDate_naiss_c(String date_naiss_c) {
-    this.datenaiss_c = date_naiss_c;
+public void setDatenaiss_c(String datenaiss_c) {
+    this.datenaiss_c = datenaiss_c;
 }
 
 public String getRue() {
@@ -82,12 +82,12 @@ public void setRue(String rue) {
     this.rue = rue;
 }
 
-public String getVille_c() {
-    return ville_c;
+public String getVillec() {
+    return villec;
 }
 
-public void setVille_c(String ville_c) {
-    this.ville_c = ville_c;
+public void setVillec(String villec) {
+    this.villec = villec;
 }
 
 public String getMdp_c() {
@@ -102,11 +102,11 @@ public String getCP() {
     return cp;
 }
 
-public void setCP(String cP_c) {
+public void setCP(String cP) {
     cp = cp;
 }
 
-public String getPays() {
+public String getPays_c() {
     return pays_c;
 }
 

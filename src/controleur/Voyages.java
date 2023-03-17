@@ -3,7 +3,7 @@ package controleur;
 public class Voyages {
     private int idv;
 
-    private String datedeb_voyages, datefin_voyages, lieu_voyage;
+    private String datedeb_voyage, datefin_voyage, lieu_voyage;
 
     public Voyages (
         int idv,
@@ -13,8 +13,8 @@ public class Voyages {
 
     {
         this.idv=idv;
-        this.datedeb_voyages = datedeb_voyages;
-        this.datefin_voyages=datefin_voyages;
+        this.datedeb_voyage = datedeb_voyage;
+        this.datefin_voyage=datefin_voyage;
         this.lieu_voyage=lieu_voyage;
     }
 
@@ -26,20 +26,20 @@ public class Voyages {
         this.idv=idv;
     }
 
-    public String getDatedeb_voyages(){
-        return datedeb_voyages;
+    public String getDatedeb_voyage(){
+        return datedeb_voyage;
     }
 
-    public void setDatedeb_voyages(String datedeb_voyages){
-        this.datedeb_voyages=datedeb_voyages;
+    public void setDatedeb_voyage(String datedeb_voyage){
+        this.datedeb_voyage=datedeb_voyage;
     }
 
-    public String getDatefin_voyages(){
-        return datefin_voyages;
+    public String getDatefin_voyage(){
+        return datefin_voyage;
     }
 
-    public void setSatefin_voyages(String datefin_voyages){
-        this.datefin_voyages=datefin_voyages;
+    public void setSatefin_voyage(String datefin_voyage){
+        this.datefin_voyage=datefin_voyage;
     }
 
     public String getLieu_voyage(){
