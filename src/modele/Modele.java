@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import controleur.Client;
-import controleur.Voyages;
+import Entity.Client;
+import Entity.Voyages;
 
 
 public class Modele {
