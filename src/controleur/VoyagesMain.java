@@ -7,10 +7,10 @@ public class VoyagesMain
 {
 	private static VueConnexion uneVueConnexion ;
 	private static VueGenerale uneVueGenerale;
-	public static void rendreVisibleVueConnexion (boolean action)
-	{
-		uneVueConnexion.setVisible(action);
-	}
+	//public static void rendreVisibleVueConnexion (boolean action)
+	//{
+	//	uneVueConnexion.setVisible(action);
+	//}
 
 	public static void instancierVueGenerale()
 	{

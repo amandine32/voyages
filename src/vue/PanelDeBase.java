@@ -11,6 +11,7 @@ public class PanelDeBase extends JPanel
 		this.setBackground(uneCouleur);
 		this.setLayout(null);
 		this.setBounds(20,40,1200,800);
+
 		this.setVisible(false);
 	}
 }

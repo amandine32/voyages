@@ -374,9 +374,4 @@ public class PanelClient<Tableau> extends PanelDeBase implements ActionListener,
 		JFrame jframe=new JFrame();
 		//jframe.setBou
 	}
-
-	public void setVisible(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
 }

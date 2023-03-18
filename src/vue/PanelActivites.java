@@ -26,24 +26,23 @@ import modele.Modele;
 
 
 
-public class PanelActivites extends PanelDeBase implements ActionListener, KeyListener
+public class PanelActivites<Tableau> extends PanelDeBase implements ActionListener, KeyListener
 {
 	private JPanel panelForm = new JPanel();
 	private JButton btAnnuler = new JButton("Annuler");
 	private JButton btEnregistrer = new JButton("Enregistrer");
-	
+
 	private JTextField txtNom_activite = new JTextField();
 	private JTextField txtType_activite = new JTextField();
 
 	
-	
-	private JComboBox<String> txtIdReservation = new JComboBox<String>();
+
 
 
 
 	private JTable uneTable ;
 	private JScrollPane uneScroll;
-	private Tableau unTableau;
+	private controleur.Tableau unTableau;
 	private JPanel panelRechercher = new JPanel();
     private JTextField txtMot = new JTextField();
     private JButton btRechercher = new JButton("Rechercher");
@@ -84,7 +83,6 @@ public class PanelActivites extends PanelDeBase implements ActionListener, KeyLi
 		this.btEnregistrer.addActionListener(this);
 		this.btRechercher.addActionListener(this);
 		this.txtMot.addKeyListener(this);
-		this.txtIdReservation.addKeyListener(this);
 		this.txtMot.addKeyListener(this);
 		this.txtNom_activite.addKeyListener(this);
 		this.txtType_activite.addKeyListener(this);
@@ -97,7 +95,7 @@ public class PanelActivites extends PanelDeBase implements ActionListener, KeyLi
 		String entetes [] = {"Ida "," Nom_activite","Type_activite"};
 		
 		Object donnees [][] = this.getDonnees("");
-		this.unTableau = new Tableau (entetes,donnees);
+		this.unTableau = new   controleur.Tableau (entetes,donnees);
 		
 		this.uneTable= new JTable(unTableau);
 		this.uneScroll = new JScrollPane(this.uneTable);

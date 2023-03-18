@@ -27,10 +27,7 @@ import modele.Modele;
 
 public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener, KeyListener
 {
-	public PanelVoyages(Color uneCouleur) {
-		super(uneCouleur);
-		// TODO Auto-generated constructor stub
-	}
+
 
 	private JPanel panelForm = new JPanel();
 	private JButton btAnnuler = new JButton("Annuler");
@@ -156,9 +153,6 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 			}});
 	}
 	
-	private void add(JPanel panelForm2) {
-	}
-
 	public Object [][] getDonnees(String mot)
 	{
 		ArrayList<Voyages> lesVoyages = Modele.selectAllVoyages(mot);
@@ -196,10 +190,6 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 		}
 		
 	}
-	private void traitement(int i) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public void viderChamps()
 	{
@@ -211,7 +201,7 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 
 	}
 
-	public void traitement (int choix, Object Modele)
+	public void traitement (int choix)
 	{
 		String datedebut = this.txtDatedeb_voyage.getText();
 		String datefin = this.txtDatefin_voyage.getText();
@@ -242,10 +232,10 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 					datedebut,
 					datefin,
 					lieu);
-			((modele.Modele) Modele).insertVoyages(unVoyage);
+			modele.Modele.insertVoyages(unVoyage);
 			
 			//on recupere le client ins�r� pour son  nouvel ID
-			unVoyage =((modele.Modele) Modele).selectWhereVoyages(lieu);
+			unVoyage =modele.Modele.selectWhereVoyages(lieu);
 			JOptionPane.showMessageDialog(this,"insertion reussie dans la base de donnee");
 			Object ligne[]={unVoyage.getIdv(),
 					unVoyage.getDatedeb_voyage(),
@@ -259,7 +249,7 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 			int numLigne= this.uneTable.getSelectedRow();
 			int idv= Integer.parseInt(this.unTableau.getValueAt(numLigne,0).toString());
 			Voyages unVoyage =  new Voyages(idv, datedebut, datefin, lieu);
-			((modele.Modele) Modele).updateVoyage(unVoyage);
+			modele.Modele.updateVoyage(unVoyage);
 			Object ligne[]={unVoyage.getIdv(),
 					unVoyage.getDatedeb_voyage(),
 					unVoyage.getDatefin_voyage(),
@@ -298,8 +288,4 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 		//jframe.setBou
 	}
 
-	public void setVisible(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
 }
