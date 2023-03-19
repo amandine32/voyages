@@ -20,9 +20,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
-import controleur.Client;
-import controleur.Tableau;
-import modele.Modele;
+import modele.Dao.DaoClients;
+import modele.Entites.Client;
 
 public class PanelClient<Tableau> extends PanelDeBase implements ActionListener, KeyListener {
 	private JPanel panelForm = new JPanel();
@@ -41,7 +40,7 @@ public class PanelClient<Tableau> extends PanelDeBase implements ActionListener,
 
 	private JTable uneTable;
 	private JScrollPane uneScroll;
-	private controleur.Tableau unTableau;
+	private vue.Tableau unTableau;
 	private JPanel panelRechercher = new JPanel();
 	private JTextField txtMot = new JTextField();
 	private JButton btRechercher = new JButton("Rechercher");
@@ -104,7 +103,7 @@ public class PanelClient<Tableau> extends PanelDeBase implements ActionListener,
 		String entetes[] = { "Id Client", "Nom", "Prenom", "rue", "cp", "ville", "pays", "mail", "datenaiss", "mdp" };
 
 		Object donnees[][] = this.getDonnees("");
-		this.unTableau = new controleur.Tableau(entetes, donnees);
+		this.unTableau = new vue.Tableau(entetes, donnees);
 
 		this.uneTable = new JTable((TableModel) unTableau);
 		this.uneScroll = new JScrollPane(this.uneTable);
@@ -123,7 +122,7 @@ public class PanelClient<Tableau> extends PanelDeBase implements ActionListener,
 					if (retour == 0) {
 						int idc = Integer.parseInt(unTableau.getValueAt(numLigne, 0).toString());
 						// on supprime le client dans la base
-						Modele.deleteClient(idc);
+						DaoClients.deleteClient(idc);
 						// on le supprime de l'affichage
 						unTableau.supprimerLigne(numLigne);
 					}
@@ -169,7 +168,7 @@ public class PanelClient<Tableau> extends PanelDeBase implements ActionListener,
 	}
 
 	public Object[][] getDonnees(String mot) {
-		ArrayList<Client> lesClients = Modele.selectAllClients(mot);
+		ArrayList<Client> lesClients = DaoClients.selectAllClients(mot);
 		Object[][] matrice = new Object[lesClients.size()][10];
 		int i = 0;
 		for (Client unClient : lesClients) {
@@ -262,24 +261,24 @@ public class PanelClient<Tableau> extends PanelDeBase implements ActionListener,
 			this.txtDatenaiss_c.setBackground(Color.red);
 		}
 
-		if ((!mdp.equals("")) && modele.Modele.validemdp(mdp)) {
+		if ((!mdp.equals("")) && modele.Dao.DaoClients.validemdp(mdp)) {
 			this.txtMdp_c.setBackground(Color.red);
 			JOptionPane.showMessageDialog(this,
 					"Le mot de passe doit avoir au moins 8 caract�re dont une majuscule, une minuscule, un caract�re special et un chiffre");
 		}
 		if (nom.equals("") || prenom.equals("") || rue.equals("") || ville.equals("") || cp.equals("")
 				|| pays.equals("") || mail.equals("") || datenaiss.equals("")
-				|| ((!mdp.equals("")) && Modele.validemdp(mdp))) {
-			if (!(!mdp.equals("")) && Modele.validemdp(mdp)) {
+				|| ((!mdp.equals("")) && DaoClients.validemdp(mdp))) {
+			if (!(!mdp.equals("")) && DaoClients.validemdp(mdp)) {
 				JOptionPane.showMessageDialog(this, "Veuillez remplir les champs obligatoires");
 			}
 			this.viderChamps();
 		} else if (choix == 0) {
 			Client unClient = new Client(0, nom, prenom, rue, cp, ville, pays, mail, datenaiss, "");
-			modele.Modele.insertClient(unClient);
+			modele.Dao.DaoClients.insertClient(unClient);
 
 			// on recupere le client ins�r� pour son nouvel ID
-			unClient = Modele.selectWhereClient(mail);
+			unClient = DaoClients.selectWhereClient(mail);
 			JOptionPane.showMessageDialog(this, "insertion reussie dans la base de donnee");
 			Object ligne[] = { unClient.getIdc(), unClient.getNomc(), unClient.getPrenomc(), unClient.getRue(),
 					unClient.getCp(), unClient.getVillec(), unClient.getPays_c(), unClient.getMail_c(),
@@ -289,7 +288,7 @@ public class PanelClient<Tableau> extends PanelDeBase implements ActionListener,
 			int numLigne = this.uneTable.getSelectedRow();
 			int idc = Integer.parseInt(this.unTableau.getValueAt(numLigne, 0).toString());
 			Client unClient = new Client(idc,nom, prenom, rue, cp, ville, pays, mail, datenaiss, mdp);
-			Modele.updateClient(unClient);
+			DaoClients.updateClient(unClient);
 			Object ligne[] = { unClient.getIdc(), unClient.getNomc(), unClient.getPrenomc(), unClient.getRue(),
 					unClient.getCp(), unClient.getVillec(), unClient.getPays_c(), unClient.getMail_c(),
 					unClient.getDatenaiss_c(), unClient.getMdp_c() };

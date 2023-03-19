@@ -1,4 +1,4 @@
-package controleur;
+package modele.Entites;
 
 public class Detail {
     private int ida, idv;

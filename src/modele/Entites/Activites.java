@@ -1,4 +1,4 @@
-package controleur;
+package modele.Entites;
 
 public class Activites {
     private int ida;

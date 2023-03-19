@@ -17,9 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-
-import controleur.VoyagesMain;
-
 public class VueGenerale extends JFrame implements ActionListener 
 {
 	

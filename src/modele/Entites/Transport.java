@@ -1,4 +1,4 @@
-package controleur;
+package modele.Entites;
 public class Transport {
     private int idt, idv;
     private String type_transport;

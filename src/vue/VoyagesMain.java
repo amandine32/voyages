@@ -1,7 +1,4 @@
-package controleur;
-
-import vue.VueConnexion;
-import vue.VueGenerale;
+package vue;
 
 public class VoyagesMain 
 {

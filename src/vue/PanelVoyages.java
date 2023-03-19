@@ -20,9 +20,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
-import controleur.Voyages;
-import controleur.Tableau;
-import modele.Modele;
+import modele.Dao.DaoVoyages;
+import modele.Entites.Voyages;
 
 public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener, KeyListener {
 
@@ -36,7 +35,7 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 
 	private JTable uneTable;
 	private JScrollPane uneScroll;
-	private controleur.Tableau unTableau;
+	private vue.Tableau unTableau;
 	private JPanel panelRechercher = new JPanel();
 	private JTextField txtMot = new JTextField();
 	private JButton btRechercher = new JButton("Rechercher");
@@ -81,7 +80,7 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 		String entetes[] = { "Idv", "date debut voyage", "date fin voyage", "lieu voyage" };
 
 		Object donnees[][] = this.getDonnees("");
-		this.unTableau = new controleur.Tableau(entetes, donnees);
+		this.unTableau = new vue.Tableau(entetes, donnees);
 
 		this.uneTable = new JTable((TableModel) unTableau);
 		this.uneScroll = new JScrollPane(this.uneTable);
@@ -100,7 +99,7 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 					if (retour == 0) {
 						int idv = Integer.parseInt(unTableau.getValueAt(numLigne, 0).toString());
 						// on supprime le client dans la base
-						Modele.deleteVoyage(idv);
+						DaoVoyages.deleteVoyage(idv);
 						// on le supprime de l'affichage
 						unTableau.supprimerLigne(numLigne);
 					}
@@ -141,7 +140,7 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 	}
 
 	public Object[][] getDonnees(String mot) {
-		ArrayList<Voyages> lesVoyages = Modele.selectAllVoyages(mot);
+		ArrayList<Voyages> lesVoyages = DaoVoyages.selectAllVoyages(mot);
 		Object[][] matrice = new Object[lesVoyages.size()][4];
 		int i = 0;
 		for (Voyages unVoyage : lesVoyages) {
@@ -197,10 +196,10 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 			this.viderChamps();
 		} else if (choix == 0) {
 			Voyages unVoyage = new Voyages(0, datedebut, datefin, lieu);
-			modele.Modele.insertVoyages(unVoyage);
+			modele.Dao.DaoVoyages.insertVoyages(unVoyage);
 
 			// on recupere le client ins�r� pour son nouvel ID
-			unVoyage = modele.Modele.selectWhereVoyages(lieu);
+			unVoyage = modele.Dao.DaoVoyages.selectWhereVoyages(lieu);
 			JOptionPane.showMessageDialog(this, "insertion reussie dans la base de donnee");
 			Object ligne[] = { unVoyage.getIdv(), unVoyage.getDatedeb_voyage(), unVoyage.getDatefin_voyage(),
 					unVoyage.getLieu_voyage() };
@@ -209,7 +208,7 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 			int numLigne = this.uneTable.getSelectedRow();
 			int idv = Integer.parseInt(this.unTableau.getValueAt(numLigne, 0).toString());
 			Voyages unVoyage = new Voyages(idv, datedebut, datefin, lieu);
-			modele.Modele.updateVoyage(unVoyage);
+			modele.Dao.DaoVoyages.updateVoyage(unVoyage);
 			Object ligne[] = { unVoyage.getIdv(), unVoyage.getDatedeb_voyage(), unVoyage.getDatefin_voyage(),
 					unVoyage.getLieu_voyage() };
 			this.unTableau.modifierLigne(numLigne, ligne);

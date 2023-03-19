@@ -1,4 +1,4 @@
-package controleur;
+package modele.Entites;
 
 public class Reservation {
     private int idr, nb_personnes;

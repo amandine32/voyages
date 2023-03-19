@@ -16,8 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import controleur.VoyagesMain;
-import modele.Modele;
+import modele.Dao.DaoClients;
 
 public class VueConnexion extends JFrame implements ActionListener, KeyListener
 {

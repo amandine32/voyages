@@ -19,10 +19,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import controleur.Activites;
-import controleur.Reservation;
-import controleur.Tableau;
-import modele.Modele;
+import modele.Dao.DaoActivites;
+import modele.Entites.Activites;
+import modele.Entites.Reservation;
 
 
 
@@ -42,7 +41,7 @@ public class PanelActivites<Tableau> extends PanelDeBase implements ActionListen
 
 	private JTable uneTable ;
 	private JScrollPane uneScroll;
-	private controleur.Tableau unTableau;
+	private vue.Tableau unTableau;
 	private JPanel panelRechercher = new JPanel();
     private JTextField txtMot = new JTextField();
     private JButton btRechercher = new JButton("Rechercher");
@@ -95,7 +94,7 @@ public class PanelActivites<Tableau> extends PanelDeBase implements ActionListen
 		String entetes [] = {"Ida "," Nom_activite","Type_activite"};
 		
 		Object donnees [][] = this.getDonnees("");
-		this.unTableau = new   controleur.Tableau (entetes,donnees);
+		this.unTableau = new   vue.Tableau (entetes,donnees);
 		
 		this.uneTable= new JTable(unTableau);
 		this.uneScroll = new JScrollPane(this.uneTable);
@@ -116,7 +115,7 @@ public class PanelActivites<Tableau> extends PanelDeBase implements ActionListen
 						int ida = Integer.parseInt(unTableau.getValueAt(numLigne, 0).toString());
 					
 						// on supprime le contrat dans la base
-						Modele.deleteActivite(ida);
+						DaoActivites.deleteActivite(ida);
 						//on le supprime de l'affichage
 						unTableau.supprimerLigne(numLigne);
 					}
@@ -160,7 +159,7 @@ public class PanelActivites<Tableau> extends PanelDeBase implements ActionListen
 
 	public Object [][] getDonnees(String mot)
 	{
-		ArrayList<Activites> lesActivites = Modele.selectAllActivites(0,mot);
+		ArrayList<Activites> lesActivites = DaoActivites.selectAllActivites(0,mot);
 		Object[][] matrice = new Object [lesActivites.size()][4];
 		int i=0;
 		for(Activites uneActivite : lesActivites)
@@ -219,10 +218,10 @@ public class PanelActivites<Tableau> extends PanelDeBase implements ActionListen
 					0,
 					nom_activite,
 					type_activite);
-			Modele.insertActivite(uneActivite);
+			DaoActivites.insertActivite(uneActivite);
 			
 			//on recupere le Contrat_location ins�r� pour son  nouvel ID
-			uneActivite= Modele.selectWhereActivites(0,nom_activite,type_activite);
+			uneActivite= DaoActivites.selectWhereActivites(0,nom_activite,type_activite);
 			JOptionPane.showMessageDialog(this,"insertion reussie dans la base de donnee");
 			Object ligne[]={uneActivite.getIda(),
 					uneActivite.getNom_activite(),
@@ -237,7 +236,7 @@ public class PanelActivites<Tableau> extends PanelDeBase implements ActionListen
 					ida,
 					nom_activite,
 					type_activite);
-			Modele.updateActivites(uneActivite);
+			DaoActivites.updateActivites(uneActivite);
 			Object ligne[]={uneActivite.getIda(),
 					uneActivite.getNom_activite(),
 					uneActivite.getType_activite()};
