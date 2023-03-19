@@ -13,8 +13,8 @@ public class Voyages {
 
     {
         this.idv=idv;
-        this.datedeb_voyage = datedeb_voyage;
-        this.datefin_voyage=datefin_voyage;
+        this.datedeb_voyage = datedeb_voyages;
+        this.datefin_voyage=datefin_voyages;
         this.lieu_voyage=lieu_voyage;
     }
 

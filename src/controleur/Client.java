@@ -11,12 +11,12 @@ public class Client {
         String nomc,
         String prenomc,
         String rue,
+        String cp,
+        String villec,
+        String pays_c,
         String mail_c,
         String datenaiss_c,
-        String mdp_c,
-        String cp,
-        String ville_c,
-        String pays_c
+        String mdp_c
        
 )
 
@@ -24,96 +24,95 @@ public class Client {
             this.idc = idc;
 			this.nomc= nomc;
 			this.prenomc = prenomc;
-			this.mail_c = mail_c;
-			this.datenaiss_c = datenaiss_c;
 			this.rue = rue;
 			this.cp = cp;
-			this.villec = ville_c;
-			this.mdp_c = mdp_c;
+			this.villec = villec;
 			this.pays_c = pays_c;
+			this.mail_c = mail_c;
+			this.datenaiss_c = datenaiss_c;
+			this.mdp_c = mdp_c;
 			
 }
 
-public int getIdc() {
-    return idc;
-}
+	public int getIdc() {
+		return idc;
+	}
 
-public void setIdc(int idc) {
-    this.idc = idc;
-}
+	public void setIdc(int idc) {
+		this.idc = idc;
+	}
 
-public String getNomc() {
-    return nomc;
-}
+	public String getNomc() {
+		return nomc;
+	}
 
-public void setNomc(String nomc) {
-    this.nomc = nomc;
-}
+	public void setNomc(String nomc) {
+		this.nomc = nomc;
+	}
 
-public String getPrenomc() {
-    return prenomc;
-}
+	public String getPrenomc() {
+		return prenomc;
+	}
 
-public void setPrenom_c(String prenomc) {
-    this.prenomc = prenomc;
-}
+	public void setPrenomc(String prenomc) {
+		this.prenomc = prenomc;
+	}
 
-public String getMail_c() {
-    return mail_c;
-}
+	public String getRue() {
+		return rue;
+	}
 
-public void setMail_c(String mail_c) {
-    this.mail_c = mail_c;
-}
+	public void setRue(String rue) {
+		this.rue = rue;
+	}
 
-public String getDatenaiss_c() {
-    return datenaiss_c;
-}
+	public String getCp() {
+		return cp;
+	}
 
-public void setDatenaiss_c(String datenaiss_c) {
-    this.datenaiss_c = datenaiss_c;
-}
+	public void setCp(String cp) {
+		this.cp = cp;
+	}
 
-public String getRue() {
-    return rue;
-}
+	public String getVillec() {
+		return villec;
+	}
 
-public void setRue(String rue) {
-    this.rue = rue;
-}
+	public void setVillec(String villec) {
+		this.villec = villec;
+	}
 
-public String getVillec() {
-    return villec;
-}
+	public String getPays_c() {
+		return pays_c;
+	}
 
-public void setVillec(String villec) {
-    this.villec = villec;
-}
+	public void setPays_c(String pays_c) {
+		this.pays_c = pays_c;
+	}
 
-public String getMdp_c() {
-    return mdp_c;
-}
+	public String getMail_c() {
+		return mail_c;
+	}
 
-public void setMdp_c(String mdp_c) {
-    this.mdp_c = mdp_c;
-}
+	public void setMail_c(String mail_c) {
+		this.mail_c = mail_c;
+	}
 
-public String getCP() {
-    return cp;
-}
+	public String getDatenaiss_c() {
+		return datenaiss_c;
+	}
 
-public void setCP(String cP) {
-    cp = cp;
-}
+	public void setDatenaiss_c(String datenaiss_c) {
+		this.datenaiss_c = datenaiss_c;
+	}
 
-public String getPays_c() {
-    return pays_c;
-}
+	public String getMdp_c() {
+		return mdp_c;
+	}
 
-public void setPays(String nomc) {
-    this.pays_c = pays_c;
-}
+	public void setMdp_c(String mdp_c) {
+		this.mdp_c = mdp_c;
+	}
 
 
-    
 }

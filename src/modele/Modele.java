@@ -84,36 +84,19 @@ public class Modele {
 /***************GESTION DES client***********************/
 public static void insertClient (Client unClient)
 {
-    String requete;
-    if(unClient.getDatenaiss_c().equals(""))
-    {
-        requete ="insert into client values"
+    String requete ="insert into client values"
                 + "(null, '"+antiInjectionSql(unClient.getNomc())+
                 "','"+antiInjectionSql(unClient.getPrenomc())+
                 "','"+antiInjectionSql(unClient.getRue())+
-                "','"+antiInjectionSql(unClient.getCP())+
+                "','"+antiInjectionSql(unClient.getCp())+
                 "','"+unClient.getVillec()+
                 "','"+antiInjectionSql(unClient.getPays_c())+
                 "','"+antiInjectionSql(unClient.getMail_c())+
                 "','"+antiInjectionSql(unClient.getDatenaiss_c())+
                 "','"+sha256(unClient.getMdp_c())+
                 "',null);";
-    }else{
-        requete ="insert into client values"
-                + "(null, '"+antiInjectionSql(unClient.getNomc())+
-                "','"+antiInjectionSql(unClient.getPrenomc())+
-                "','"+antiInjectionSql(unClient.getRue())+
-                "','"+antiInjectionSql(unClient.getCP())+
-                "','"+unClient.getVillec()+
-                "','"+antiInjectionSql(unClient.getPays_c())+
-                "','"+antiInjectionSql(unClient.getRue())+
-                "','"+antiInjectionSql(unClient.getMail_c())+
-                "','"+antiInjectionSql(unClient.getDatenaiss_c())+
-                "','"+unClient.getMdp_c()+
-                "');";
-    }
-    
 
+    
     try
     {
         uneBdd.seConnecter();
@@ -163,12 +146,12 @@ public static ArrayList<Client> selectAllClients(String mot)
                     desResultats.getString("nomc"),
                     desResultats.getString("prenomc"),
                     desResultats.getString("rue"),
-                    desResultats.getString("mail_c"),                    
-                    desResultats.getString("datenaiss_c"),
-                    desResultats.getString("mdp_c"),
-                    desResultats.getString("cp"),
+                    desResultats.getString("cp"),                    
                     desResultats.getString("villec"),
-                    desResultats.getString("pays_c"));
+                    desResultats.getString("pays_c"),
+                    desResultats.getString("mail_c"),
+                    desResultats.getString("datenaiss_c"),
+                    desResultats.getString("mdp_c"));
             // on ajoute cet objet � la liste des clients
             lesCLients.add(UnClient);
 
@@ -204,8 +187,12 @@ public static void deleteClient(int idc)
 
 public static Client selectWhereClient(String mail_c)
 {
-    Client UnCLient = null;
-    String requete = "select * from client where mail_c = '"+mail_c+"';" ;
+	Client unClient = null;
+	String requete;
+
+	
+		requete = "select * from client where mail_c = '"+mail_c+"';" ;
+
     try
     {
         uneBdd.seConnecter();
@@ -214,7 +201,7 @@ public static Client selectWhereClient(String mail_c)
         //parcours des r�sultats pour construire les instances de clients
         if (unResultat.next())
         {
-            UnCLient = new Client(
+        	unClient = new Client(
                     unResultat.getInt("idc"),
                     unResultat.getString("nomc"),
                     unResultat.getString("prenomc"),
@@ -234,87 +221,59 @@ public static Client selectWhereClient(String mail_c)
     {
         System.out.println("Erreur execution requete : "+ requete);
     }
-    return UnCLient;
+    return unClient;
 }
 
 
-public static void updateClient(Client UnClient)
+public static void updateClient(Client unClient)
 {
-    String requete;
-    if(UnClient.getDatenaiss_c().equals(""))
-    {
-        requete ="update client set nomc '"
-                +antiInjectionSql(UnClient.getNomc())+"', prenomc = '"
-                +antiInjectionSql(UnClient.getPrenomc())+"', rue = '"
-                +antiInjectionSql(UnClient.getRue())+"', CP= '"
-                +antiInjectionSql(UnClient.getCP())+"', villec = '"
-                +UnClient.getVillec()+"', pays_c = '"
-                +antiInjectionSql(UnClient.getPays_c())+"', mail_c = '"
-                +antiInjectionSql(UnClient.getMail_c())+"', datenaiss_c = '"
-                +antiInjectionSql(UnClient.getDatenaiss_c())+"', mdp_c = '"
-                +sha256(UnClient.getMdp_c())+"' where idc = " + UnClient.getIdc()+
-                ";";
-    }else if(UnClient.getMdp_c().equals(""))
-    {
-        requete ="update client set nomc= '"
-                +antiInjectionSql(UnClient.getNomc())+"', prenomc= '"
-                +antiInjectionSql(UnClient.getPrenomc())+"', rue = '"
-                +antiInjectionSql(UnClient.getRue())+"', CP = '"
-                +antiInjectionSql(UnClient.getCP())+"', villec = '"
-                +UnClient.getVillec()+"', pays_c = '"
-                +antiInjectionSql(UnClient.getPays_c())+"', mail_c = '"
-                +antiInjectionSql(UnClient.getMail_c())+"', datenaiss_c = '"
-                +antiInjectionSql(UnClient.getDatenaiss_c())+"', mdp_c = '"
-                +UnClient.getMdp_c()+"' where idc = " + UnClient.getIdc()+
-                ";";
-    }else if(UnClient.getMdp_c().equals("") && UnClient.getDatenaiss_c().equals(""))
-    {
-        requete ="update client set nomc= '"
-                +antiInjectionSql(UnClient.getNomc())+"', prenomc = '"
-                +antiInjectionSql(UnClient.getPrenomc())+"', rue = '"
-                +antiInjectionSql(UnClient.getRue())+"', CP = '"
-                +antiInjectionSql(UnClient.getCP())+"', villec = '"
-                +UnClient.getVillec()+"', pays_c = '"
-                +antiInjectionSql(UnClient.getPays_c())+"', mail_c = '"
-                +antiInjectionSql(UnClient.getMail_c())+"', datenaiss_c = '"
-                +antiInjectionSql(UnClient.getDatenaiss_c())+"', mdp_c = '"
-                +UnClient.getMdp_c()+"' where idc = " + UnClient.getIdc()+
-                ";";
-    }else
-    {
-        requete ="update client set nomc= '"
-                +antiInjectionSql(UnClient.getNomc())+"', prenomc = '"
-                +antiInjectionSql(UnClient.getPrenomc())+"', rue = '"
-                +antiInjectionSql(UnClient.getRue())+"', CP = '"
-                +antiInjectionSql(UnClient.getCP())+"', villec = '"
-                +UnClient.getVillec()+"', pays_c = '"
-                +antiInjectionSql(UnClient.getPays_c())+"', mail_c = '"
-                +antiInjectionSql(UnClient.getMail_c())+"', datenaiss_c = '"
-                +antiInjectionSql(UnClient.getDatenaiss_c())+"', mdp_c = '"
-                +UnClient.getMdp_c()+"' where idc = " + UnClient.getIdc()+
-                ";";
-    }
-
-    try
-    {
-        uneBdd.seConnecter();
-        Statement unStat = uneBdd.getMaConnexion().createStatement();
-        unStat.execute(requete);
-        unStat.close();
-        uneBdd.seDeConnecter();
-    }
-    catch(SQLException exp)
-    {
-        System.out.println("Erreur execution requete : "+ requete);
-    }
+	String requete;
+	if (unClient.getMdp_c().equals(""))
+	{
+		requete ="update client set nomc= '"+antiInjectionSql(unClient.getNomc())
+				+"', prenomc = '"+antiInjectionSql(unClient.getPrenomc())
+				+"', rue = '"+antiInjectionSql(unClient.getRue())
+				+"', cp = '"+antiInjectionSql(unClient.getCp())
+				+"', villec = '"+unClient.getVillec()
+				+"', pays_c = '"+antiInjectionSql(unClient.getPays_c())
+				+"', mail_c = '"+antiInjectionSql(unClient.getMail_c())
+				+"', datenaiss_c = '"+antiInjectionSql(unClient.getDatenaiss_c())
+				+"', mdp_c = '"+antiInjectionSql(unClient.getMdp_c())
+				+"' where idc = " + unClient.getIdc()+
+				";";
+	}else
+	{
+		requete ="update client set nomc= '"+antiInjectionSql(unClient.getNomc())
+				+"', prenomc = '"+antiInjectionSql(unClient.getPrenomc())
+				+"', rue = '"+antiInjectionSql(unClient.getRue())
+				+"', cp = '"+antiInjectionSql(unClient.getCp())
+				+"', villec = '"+unClient.getVillec()
+				+"', pays_c = '"+antiInjectionSql(unClient.getPays_c())
+				+"', mail_c = '"+antiInjectionSql(unClient.getMail_c())
+				+"', datenaiss_c = '"+antiInjectionSql(unClient.getDatenaiss_c())
+				+"', mdp_c = '"+sha256(unClient.getMdp_c())
+				+"' where idc = " + unClient.getIdc()+
+				";";
+	}
+	
+	try
+	{
+		uneBdd.seConnecter();
+		Statement unStat = uneBdd.getMaConnexion().createStatement();
+		unStat.execute(requete);
+		unStat.close();
+		uneBdd.seDeConnecter();
+	}
+	catch(SQLException exp)
+	{
+		System.out.println("Erreur execution requete : "+ requete);
+	}
 }
-
 /***************GESTION DES voyages***********************/
 public static void insertVoyages (Voyages unVoyage)
 {
-    String requete;
 
-        requete ="insert into voyages values"
+		String requete ="insert into voyages values"
                 + "(null, '"+antiInjectionSql(unVoyage.getDatedeb_voyage())+
                 "','"+antiInjectionSql(unVoyage.getDatefin_voyage())+
                 "','"+antiInjectionSql(unVoyage.getLieu_voyage())+
@@ -345,7 +304,7 @@ public static ArrayList<Voyages> selectAllVoyages(String mot)
     else
     {
         requete="select * from voyages where datedeb_voyage like '%"+mot
-                +"%' or datefin_voyage like '%"+mot
+        		+"%' or datefin_voyage like '%"+mot
                 +"%' or lieu_voyage like '%"+mot
                 +"%' ;";
     }
@@ -429,13 +388,11 @@ public static Voyages selectWhereVoyages(String idv)
 
 public static void updateVoyage(Voyages UnVoyage)
 {
-    String requete;
-
-        requete ="update voyage set datedeb_voyage '"
-                +antiInjectionSql(UnVoyage.getDatedeb_voyage())+"', datefin_voyage = '"
-                +antiInjectionSql(UnVoyage.getDatefin_voyage())+"', lieu_voyage = '"
-                +sha256(UnVoyage.getLieu_voyage())+"' where idv = " + UnVoyage.getIdv()+
-                ";";
+	String requete ="update voyages set datedeb_voyage= '"+antiInjectionSql(UnVoyage.getDatedeb_voyage())
+	+"', datefin_voyage = '"+antiInjectionSql(UnVoyage.getDatefin_voyage())
+	+"', lieu_voyage = '"+antiInjectionSql(UnVoyage.getLieu_voyage())
+	+"' where idv = " + UnVoyage.getIdv()+
+	";";
     try
     {
         uneBdd.seConnecter();
