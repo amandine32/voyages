@@ -67,3 +67,13 @@ CREATE TABLE details(
     foreign key(ida) references activites(ida),
     foreign key(idv) references voyages(idv)
 );
+
+insert into client values (1, 'bremont', 'amandine', 'rue de la tour',95120, 'ermont', 'france','a@gmail.com', '2000-12-03', 'A@dk,cd1');
+
+insert into voyages values (2, '2023-02-02', '2023-03-12', 'paris');
+insert into voyages values (1, '2023-02-02', '2023-03-12', 'londres');
+insert into voyages values (3, '2023-02-02', '2023-03-12', 'barcelone');
+
+insert into activites values('1', 'plongee', 'activite aquatique');
+insert into activites values('2', 'musee', 'visite');
+insert into activites values('3', 'jetski', 'activite aquatique');
