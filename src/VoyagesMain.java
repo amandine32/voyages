@@ -1,4 +1,7 @@
-package vue;
+
+
+import vue.VueConnexion;
+import vue.VueGenerale;
 
 public class VoyagesMain 
 {
