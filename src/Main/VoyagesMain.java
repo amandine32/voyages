@@ -1,4 +1,4 @@
-
+package Main;
 
 import vue.VueConnexion;
 import vue.VueGenerale;
