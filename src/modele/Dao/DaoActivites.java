@@ -15,8 +15,8 @@ import modele.Entites.Voyages;
 
 
 public class DaoActivites {
-	private static Bdd uneBdd = new Bdd("localhost","bddvoyages","root","");
-//	private static Bdd uneBdd = new Bdd("172.20.111.117","neigesoleil","amandine","amandine");
+	// private static Bdd uneBdd = new Bdd("localhost","bddvoyages","root","root");
+	private static Bdd uneBdd = new Bdd("127.0.0.1","bddvoyages","root","root");
 	
 	/********************UTILITAIRE******************/
 	

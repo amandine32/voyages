@@ -24,10 +24,10 @@ public class Bdd
 	}
 	public void seConnecter()
 	{
-		String url = "jdbc:mysql://"+this.serveur +"/"+this.bdd;
+		String url = "jdbc:mysql://localhost:8889/bddvoyages?autoReconnect=true&useSSL=false";
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		}
 		catch(ClassNotFoundException exp)
 		{
@@ -45,7 +45,7 @@ public class Bdd
 	public void seDeConnecter()
 	{
 		try{
-			if(this.maConnexion != null)
+			if(this.maConnexion != null) 
 			{
 				this.maConnexion.close();
 			}
