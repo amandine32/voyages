@@ -7,8 +7,7 @@ import java.sql.SQLException;
 public class Bdd 
 {
 	private String serveur, bdd, user, mdp;
-	{
-		
+	{	
 	}
 	private Connection maConnexion;
 	{
