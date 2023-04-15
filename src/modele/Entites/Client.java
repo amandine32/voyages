@@ -3,36 +3,44 @@ package modele.Entites;
 public class Client {
 
     private int idc;
-    private String nomc, prenomc, rue, cp, villec, pays_c, mail_c, datenaiss_c, mdp_c;
+    private String nomc;
+	private String prenomc;
+	private String rue;
+	private String cp;
+	private String villec;
+	private String pays_c;
+	private String mail_c;
+	private String datenaiss_c;
+	private String mdp_c;
 
-    public Client(
-      
-        int idc,
-        String nomc,
-        String prenomc,
-        String rue,
-        String cp,
-        String villec,
-        String pays_c,
-        String mail_c,
-        String datenaiss_c,
-        String mdp_c
-       
-)
+	public Client(
+		      
+	        int idc,
+	        String nomc,
+	        String prenomc,
+	        String rue,
+	        String cp,
+	        String villec,
+	        String pays_c,
+	        String mail_c,
+	        String datenaiss_c,
+	        String mdp_c
+	       
+	)
 
-{
-            this.idc = idc;
-			this.nomc= nomc;
-			this.prenomc = prenomc;
-			this.rue = rue;
-			this.cp = cp;
-			this.villec = villec;
-			this.pays_c = pays_c;
-			this.mail_c = mail_c;
-			this.datenaiss_c = datenaiss_c;
-			this.mdp_c = mdp_c;
-			
-}
+	{
+	            this.idc = idc;
+				this.nomc= nomc;
+				this.prenomc = prenomc;
+				this.rue = rue;
+				this.cp = cp;
+				this.villec = villec;
+				this.pays_c = pays_c;
+				this.mail_c = mail_c;
+				this.datenaiss_c = datenaiss_c;
+				this.mdp_c = mdp_c;
+				
+	}
 
 	public int getIdc() {
 		return idc;
