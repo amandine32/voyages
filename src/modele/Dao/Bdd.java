@@ -23,7 +23,7 @@ public class Bdd
 	}
 	public void seConnecter()
 	{
-		String url = "jdbc:mysql://localhost:8889/bddvoyages?autoReconnect=true&useSSL=false";
+		String url = "jdbc:mysql://"+this.serveur +"/"+this.bdd;
 		System.out.println("co ok");
 		try
 		{

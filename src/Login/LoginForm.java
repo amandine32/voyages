@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import modele.Entites.*;
+import vue.PanelEnregistrerClient;
 
 import javax.swing.*;
 
@@ -15,6 +16,7 @@ public class LoginForm extends JFrame {
     final private Font mainFont = new Font("Segoe print", Font.BOLD, 18);
     JTextField tfEmail;
     JPasswordField pfPassword;
+
 
     public void initialize() {
         
@@ -84,12 +86,26 @@ public class LoginForm extends JFrame {
             }
             
         });
+        
+        JButton btnInscription = new JButton("S'inscrire");
+        btnInscription.setFont(mainFont);
+        btnInscription.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	PanelEnregistrerClient panelEnregistrerClient = new PanelEnregistrerClient();
+            	panelEnregistrerClient.setVisible(true);            	
+                dispose();
+            }
+            
+        });
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(1, 2, 10, 0));
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
         buttonsPanel.add(btnLogin);
         buttonsPanel.add(btnCancel);
+        buttonsPanel.add(btnInscription);
 
 
 
@@ -110,10 +126,10 @@ public class LoginForm extends JFrame {
 
     private Client getAuthenticatedUser(String mail_c, String mdp_c) {
         Client user = null;
-
-        final String DB_URL =  "jdbc:mysql://localhost:8889/bddvoyages?autoReconnect=true&useSSL=false";
+        //localhost","bddvoyages","root",""
+        final String DB_URL =  "jdbc:mysql://localhost/bddvoyages?autoReconnect=true&useSSL=false";
         final String USERNAME = "root";
-        final String PASSWORD = "root";
+        final String PASSWORD = "";
 
         try{
             Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
