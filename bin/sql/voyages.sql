@@ -24,7 +24,7 @@ CREATE TABLE reservation(
 );
 
 CREATE TABLE voyages(
-    idv int(5) not null, 
+    idv int(5) not null auto_increment, 
     datedeb_voyage date not null,
     datefin_voyage date not null,
     lieu_voyage  varchar (30) not null,
