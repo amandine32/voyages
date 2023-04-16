@@ -35,7 +35,7 @@ public class VoyagesMain extends JFrame
 		//uneVueConnexion = new VueConnexion();
 	}
 	
-	 public void initialize(Client user) {
+	  public void initialize(Client user) {
 	        /*************** Info Panel ***************/
 	        JPanel infoPanel = new JPanel();
 	        infoPanel.setLayout(new GridLayout(0, 2, 5, 5));
