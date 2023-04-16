@@ -93,8 +93,7 @@ public static void insertClient (Client unClient)
                 "','"+antiInjectionSql(unClient.getPays_c())+
                 "','"+antiInjectionSql(unClient.getMail_c())+
                 "','"+antiInjectionSql(unClient.getDatenaiss_c())+
-                "','"+sha256(unClient.getMdp_c())+
-                "',null);";
+                "','"+unClient.getMdp_c()+"');";
 
     
     try

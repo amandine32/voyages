@@ -218,10 +218,10 @@ public class PanelActivites<Tableau> extends PanelDeBase implements ActionListen
 					0,
 					nom_activite,
 					type_activite);
-			DaoActivites.insertActivite(uneActivite);
+			int id= DaoActivites.insertActivite(uneActivite);
 			
 			//on recupere le Contrat_location ins�r� pour son  nouvel ID
-			uneActivite= DaoActivites.selectWhereActivites(0,nom_activite,type_activite);
+			uneActivite= DaoActivites.selectWhereActivites(id);
 			JOptionPane.showMessageDialog(this,"insertion reussie dans la base de donnee");
 			Object ligne[]={uneActivite.getIda(),
 					uneActivite.getNom_activite(),

@@ -1,5 +1,6 @@
 package modele.Dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.nio.charset.*;
 import java.security.*;
@@ -81,27 +82,43 @@ public class DaoVoyages {
         String outputString = matcher.replaceAll("");
         return outputString;
     }
-	public static void insertVoyages (Voyages unVoyage)
+	public static int insertVoyages (Voyages unVoyage)
 {
+		int id;
 
 		String requete ="insert into voyages values"
                 + "(null, '"+antiInjectionSql(unVoyage.getDatedeb_voyage())+
                 "','"+antiInjectionSql(unVoyage.getDatefin_voyage())+
                 "','"+antiInjectionSql(unVoyage.getLieu_voyage())+
-                "',null);";
+                "');";
  
     try
     {
         uneBdd.seConnecter();
-        Statement unStat = uneBdd.getMaConnexion().createStatement();
-        unStat.execute(requete);
+
+PreparedStatement unStat = uneBdd.getMaConnexion().prepareStatement(requete,
+                Statement.RETURN_GENERATED_KEYS);
+       
+unStat.executeUpdate();
+        
+        ResultSet generatedKeys = unStat.getGeneratedKeys();
+        
+            if (generatedKeys.next()) {
+                id=generatedKeys.getInt(1);
+            }
+            else {
+                throw new SQLException("Creating user failed, no ID obtained.");
+            }
+        
         unStat.close();
         uneBdd.seDeConnecter();
+        return id;
     }
     catch(SQLException exp)
     {
         System.out.println("Erreur execution requete : "+ requete);
     }
+    return -1;
 }
 
 public static ArrayList<Voyages> selectAllVoyages(String mot)
@@ -166,10 +183,10 @@ public static void deleteVoyage(int idv)
     }
 }
 
-public static Voyages selectWhereVoyages(String idv)
+public static Voyages selectWhereVoyages(int idv)
 {
     Voyages UnVoyage = null;
-    String requete = "select * from voyages where idv = '"+idv+"';" ;
+    String requete = "select * from voyages where idv = "+idv+";" ;
     try
     {
         uneBdd.seConnecter();
@@ -180,7 +197,7 @@ public static Voyages selectWhereVoyages(String idv)
         {
             UnVoyage = new Voyages(
                     unResultat.getInt("idv"),
-                    unResultat.getString(" datedeb_voyage"),
+                    unResultat.getString("datedeb_voyage"),
                     unResultat.getString("datefin_voyage"),
                     unResultat.getString("lieu_voyage")
                     

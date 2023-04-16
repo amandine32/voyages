@@ -1,5 +1,6 @@
 package modele.Dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.nio.charset.*;
 import java.security.*;
@@ -82,25 +83,38 @@ public class DaoActivites {
         return outputString;
     }
 	
-	public static void insertActivite(Activites uneActivite)
-{
+	public static int insertActivite(Activites uneActivite)
+{int id;
 	String requete ="insert into activites values"
-			+"(null,1,"
-			+uneActivite.getIda()+
-			",null);";
+			+"(null,'"
+			+uneActivite.getNom_activite()+
+			"','"+uneActivite.getType_activite()+"');";
 	try
 	{
 		uneBdd.seConnecter();
-		Statement unStat = uneBdd.getMaConnexion().createStatement();
-		unStat.execute(requete);
+		PreparedStatement unStat = uneBdd.getMaConnexion().prepareStatement(requete,
+                Statement.RETURN_GENERATED_KEYS);
+       
+		unStat.executeUpdate();
+        
+        ResultSet generatedKeys = unStat.getGeneratedKeys();
+        
+            if (generatedKeys.next()) {
+                id=generatedKeys.getInt(1);
+            }
+            else {
+                throw new SQLException("Creating user failed, no ID obtained.");
+            }
 		unStat.close();
 		uneBdd.seDeConnecter();
+		return id;
 	}
 	catch(SQLException exp)
 	{
 		System.out.println("Erreur execution requete : "+ requete);
 		exp.printStackTrace();
 	}
+	return 0;
 }
 
 public static ArrayList<Activites> selectAllActivites(int ida, String mot)
@@ -148,17 +162,11 @@ public static ArrayList<Activites> selectAllActivites(int ida, String mot)
 	return lesActivites;
 }
 
-public static Activites selectWhereActivites(int ida, String nom_activite, String type_activite)
+public static Activites selectWhereActivites(int ida)
 {
 String requete="";
-if(ida==0)
-{
-	requete ="select * from activites where ida = '"+ida+"' and nom_activite = '"+nom_activite+ "';";
-	System.out.println(requete);
-}else
-{
-	requete = "select * from activites where ida = '"+ida+"' and type_activite="+type_activite+";" ;
-}
+
+requete = "select * from activites where ida = '"+ida+"';" ;
 
 Activites uneActivite = null;
 try

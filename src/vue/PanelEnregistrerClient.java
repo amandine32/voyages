@@ -124,7 +124,7 @@ public class PanelEnregistrerClient extends JFrame implements ActionListener, Ke
 
 	}
 
-	public void traitement(int choix) {
+	public void traitement() {
 		String nom = this.txtNomc.getText();
 		String prenom = this.txtPrenomc.getText();
 		String rue = this.txtRue.getText();
@@ -170,17 +170,18 @@ public class PanelEnregistrerClient extends JFrame implements ActionListener, Ke
 			if (!(!mdp.equals("")) && DaoClients.validemdp(mdp)) {
 				JOptionPane.showMessageDialog(this, "Veuillez remplir les champs obligatoires");
 			}
-			this.viderChamps();
-		} else if (choix == 0) {
-			Client unClient = new Client(0, nom, prenom, rue, cp, ville, pays, mail, datenaiss, "");
+		}
+		else {
+
+			Client unClient = new Client(0, nom, prenom, rue, cp, ville, pays, mail, datenaiss, mdp);
 			modele.Dao.DaoClients.insertClient(unClient);
 
 			// on recupere le client ins�r� pour son nouvel ID
 			unClient = DaoClients.selectWhereClient(mail);
 			JOptionPane.showMessageDialog(this, "insertion reussie dans la base de donnee");
-		} 
 
 		this.viderChamps();
+		}
 	}
 
 	@Override
@@ -212,6 +213,7 @@ public class PanelEnregistrerClient extends JFrame implements ActionListener, Ke
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		traitement();
 		
 	}
 }

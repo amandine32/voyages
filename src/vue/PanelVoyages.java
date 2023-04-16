@@ -27,7 +27,7 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 
 	private JPanel panelForm = new JPanel();
 	private JButton btAnnuler = new JButton("Annuler");
-	private JButton btEnregistrer = new JButton("Modifier");
+	private JButton btEnregistrer = new JButton("Enregistrer");
 
 	private JTextField txtDatedeb_voyage = new JTextField();
 	private JTextField txtDatefin_voyage = new JTextField();
@@ -158,6 +158,7 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.btAnnuler) {
 			this.viderChamps();
+			btEnregistrer.setText("Enregistrer");
 		} else if (e.getSource() == this.btEnregistrer && e.getActionCommand().equals("Enregistrer")) {
 			this.traitement(0);
 		} else if (e.getSource() == this.btEnregistrer && e.getActionCommand().equals("Modifier")) {
@@ -196,10 +197,10 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 			this.viderChamps();
 		} else if (choix == 0) {
 			Voyages unVoyage = new Voyages(0, datedebut, datefin, lieu);
-			modele.Dao.DaoVoyages.insertVoyages(unVoyage);
+			int idv=modele.Dao.DaoVoyages.insertVoyages(unVoyage);
 
 			// on recupere le client ins�r� pour son nouvel ID
-			unVoyage = modele.Dao.DaoVoyages.selectWhereVoyages(lieu);
+			unVoyage = modele.Dao.DaoVoyages.selectWhereVoyages(idv);
 			JOptionPane.showMessageDialog(this, "insertion reussie dans la base de donnee");
 			Object ligne[] = { unVoyage.getIdv(), unVoyage.getDatedeb_voyage(), unVoyage.getDatefin_voyage(),
 					unVoyage.getLieu_voyage() };
