@@ -162,13 +162,22 @@ public class PanelEnregistrerClient extends JFrame implements ActionListener, Ke
 		if ((!mdp.equals("")) && modele.Dao.DaoClients.validemdp(mdp)) {
 			this.txtMdp_c.setBackground(Color.red);
 			JOptionPane.showMessageDialog(this,
-					"Le mot de passe doit avoir au moins 8 caract�re dont une majuscule, une minuscule, un caract�re special et un chiffre");
+					"Le mot de passe doit avoir au moins 8 caractère dont une majuscule, une minuscule, un caract�re special et un chiffre");
+			System.out.println("echec insertion");
 		}
+		if ((!datenaiss.equals("")) && modele.Dao.DaoClients.validedatenaiss(datenaiss)) {
+			this.txtMdp_c.setBackground(Color.red);
+			JOptionPane.showMessageDialog(this,
+					"Veuillez indiquer votre date de naissance sous ce format la : AAAA-MM-JJ");
+			System.out.println("echec insertion");
+		}
+		
 		if (nom.equals("") || prenom.equals("") || rue.equals("") || ville.equals("") || cp.equals("")
 				|| pays.equals("") || mail.equals("") || datenaiss.equals("")
 				|| ((!mdp.equals("")) && DaoClients.validemdp(mdp))) {
 			if (!(!mdp.equals("")) && DaoClients.validemdp(mdp)) {
 				JOptionPane.showMessageDialog(this, "Veuillez remplir les champs obligatoires");
+				System.out.println("echec insertion");
 			}
 		}
 		else {
@@ -179,6 +188,7 @@ public class PanelEnregistrerClient extends JFrame implements ActionListener, Ke
 			// on recupere le client ins�r� pour son nouvel ID
 			unClient = DaoClients.selectWhereClient(mail);
 			JOptionPane.showMessageDialog(this, "insertion reussie dans la base de donnee");
+			System.out.println("Insertion réussie dans a base de donnée");
 
 		this.viderChamps();
 		}

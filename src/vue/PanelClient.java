@@ -124,6 +124,7 @@ public class PanelClient<Tableau> extends PanelDeBase implements ActionListener,
 						int idc = Integer.parseInt(unTableau.getValueAt(numLigne, 0).toString());
 						// on supprime le client dans la base
 						DaoClients.deleteClient(idc);
+						System.out.println("suppression du client dans la base de donnée");
 						// on le supprime de l'affichage
 						unTableau.supprimerLigne(numLigne);
 					}
@@ -265,7 +266,7 @@ public class PanelClient<Tableau> extends PanelDeBase implements ActionListener,
 		if ((!mdp.equals("")) && modele.Dao.DaoClients.validemdp(mdp)) {
 			this.txtMdp_c.setBackground(Color.red);
 			JOptionPane.showMessageDialog(this,
-					"Le mot de passe doit avoir au moins 8 caract�re dont une majuscule, une minuscule, un caract�re special et un chiffre");
+					"Le mot de passe doit avoir au moins 8 caract�re dont une majuscule, une minuscule, un caractère special et un chiffre");
 		}
 		if (nom.equals("") || prenom.equals("") || rue.equals("") || ville.equals("") || cp.equals("")
 				|| pays.equals("") || mail.equals("") || datenaiss.equals("")

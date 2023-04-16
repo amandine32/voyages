@@ -100,6 +100,7 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 						int idv = Integer.parseInt(unTableau.getValueAt(numLigne, 0).toString());
 						// on supprime le client dans la base
 						DaoVoyages.deleteVoyage(idv);
+						System.out.println("supression du voyage dans la base");
 						// on le supprime de l'affichage
 						unTableau.supprimerLigne(numLigne);
 					}
@@ -202,6 +203,7 @@ public class PanelVoyages<Tableau> extends PanelDeBase implements ActionListener
 			// on recupere le client ins�r� pour son nouvel ID
 			unVoyage = modele.Dao.DaoVoyages.selectWhereVoyages(idv);
 			JOptionPane.showMessageDialog(this, "insertion reussie dans la base de donnee");
+			System.out.println("Insertion réussie dans a base de donnée");
 			Object ligne[] = { unVoyage.getIdv(), unVoyage.getDatedeb_voyage(), unVoyage.getDatefin_voyage(),
 					unVoyage.getLieu_voyage() };
 			this.unTableau.ajouterLigne(ligne);

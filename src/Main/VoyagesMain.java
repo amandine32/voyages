@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import Login.LoginForm;
 import modele.Entites.Client;
 import vue.VueConnexion;
 import vue.VueGenerale;
@@ -31,7 +32,10 @@ public class VoyagesMain extends JFrame
 		uneVueGenerale = new VueGenerale ();
 	}
 	public static void main(String args[])
-	{new VueGenerale ();
+	{
+		LoginForm loginForm = new LoginForm();
+		loginForm.initialize();
+		//new VueGenerale ();
 		//uneVueConnexion = new VueConnexion();
 	}
 	

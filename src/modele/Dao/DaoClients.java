@@ -15,7 +15,7 @@ import modele.Entites.Voyages;
 
 
 public class DaoClients {
-	private static Bdd uneBdd = new Bdd("localhost","bddvoyages","root","");
+	private static Bdd uneBdd = new Bdd("localhost","bddvoyages","root","root");
 //	private static Bdd uneBdd = new Bdd("172.20.111.117","neigesoleil","amandine","amandine");
 	
 	/********************UTILITAIRE******************/
@@ -64,6 +64,17 @@ public class DaoClients {
   
         return !m.matches();
     }
+	
+	public static boolean validedatenaiss(String datenaiss) {
+		
+		String regex = "^(?:\\d{4})-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$";
+		
+		Pattern p = Pattern.compile(regex);
+		
+		Matcher m = p.matcher(datenaiss);
+		
+		return !m.matches();
+	}
 	
 	public static String antiInjectionSql(String mot)
     {

@@ -127,9 +127,9 @@ public class LoginForm extends JFrame {
     private Client getAuthenticatedUser(String mail_c, String mdp_c) {
         Client user = null;
         //localhost","bddvoyages","root",""
-        final String DB_URL =  "jdbc:mysql://localhost/bddvoyages?autoReconnect=true&useSSL=false";
+        final String DB_URL =  "jdbc:mysql://localhost:8889/bddvoyages?autoReconnect=true&useSSL=false";
         final String USERNAME = "root";
-        final String PASSWORD = "";
+        final String PASSWORD = "root";
 
         try{
             Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
@@ -161,8 +161,5 @@ public class LoginForm extends JFrame {
     }
 
 
-    public static void main(String[] args) {
-        LoginForm loginForm = new LoginForm();
-        loginForm.initialize();
-    }
+    
 }

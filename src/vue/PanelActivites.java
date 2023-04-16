@@ -116,6 +116,7 @@ public class PanelActivites<Tableau> extends PanelDeBase implements ActionListen
 					
 						// on supprime le contrat dans la base
 						DaoActivites.deleteActivite(ida);
+						System.out.println("supression de l'acivité dans la base de donnée");
 						//on le supprime de l'affichage
 						unTableau.supprimerLigne(numLigne);
 					}
@@ -223,6 +224,7 @@ public class PanelActivites<Tableau> extends PanelDeBase implements ActionListen
 			//on recupere le Contrat_location ins�r� pour son  nouvel ID
 			uneActivite= DaoActivites.selectWhereActivites(id);
 			JOptionPane.showMessageDialog(this,"insertion reussie dans la base de donnee");
+			System.out.println("Insertion réussie dans a base de donnée");
 			Object ligne[]={uneActivite.getIda(),
 					uneActivite.getNom_activite(),
 					uneActivite.getType_activite()};
