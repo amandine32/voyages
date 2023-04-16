@@ -11,8 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import Login.LoginForm;
 import modele.Entites.Client;
+import vue.LoginForm;
 import vue.VueConnexion;
 import vue.VueGenerale;
 
